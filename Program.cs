@@ -7,6 +7,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+.ConfigureWebHostDefaults(webBuilder =>{
+    webBuilder.UseUrls("http://localhost:5067", "https://localhost:7059");
+});
+
+builder.Services.AddHttpsRedirection(options => options.HttpsPort = 7059);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
