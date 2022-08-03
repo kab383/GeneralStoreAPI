@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using GeneralStoreAPI.Data;
 using Microsoft.AspNetCore.Mvc;
 using GeneralStoreAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GeneralStoreAPI.Controllers
 {
@@ -29,6 +30,12 @@ namespace GeneralStoreAPI.Controllers
             _db.Customers.Add(customer);
             await _db.SaveChangesAsync();
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllCustomers() {
+            var customers = await _db.Customers.ToListAsync();
+            return Ok(customers);
         }
     }
 }
