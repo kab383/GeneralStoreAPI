@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GeneralStoreAPI.Data;
 using Microsoft.AspNetCore.Mvc;
+using GeneralStoreAPI.Models;
 
 namespace GeneralStoreAPI.Controllers
 {
@@ -18,5 +19,16 @@ namespace GeneralStoreAPI.Controllers
             _db = db;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateCustomer(CustomerEdit newCustomer) {
+            Customer customer = new Customer() {
+                Name = newCustomer.Name,
+                Email = newCustomer.Email,
+            };
+
+            _db.Customers.Add(customer);
+            await _db.SaveChangesAsync();
+            return Ok();
+        }
     }
 }
