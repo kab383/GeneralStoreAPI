@@ -1,3 +1,6 @@
+using GeneralStoreAPI.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -14,6 +17,8 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
 });
 
 builder.Services.AddHttpsRedirection(options => options.HttpsPort = 7059);
+
+builder.Services.AddDbContext<GeneralStoreDBContext>(a => a.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

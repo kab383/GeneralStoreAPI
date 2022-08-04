@@ -20,7 +20,7 @@ namespace GeneralStoreAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct(ProductEdit newProduct) {
+        public async Task<IActionResult> CreateProduct([FromForm] ProductEdit newProduct) {
             Product product = new Product() {
                 Name = newProduct.Name,
                 Price = newProduct.Price,
